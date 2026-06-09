@@ -4,7 +4,11 @@ import com.example.Inventra.dto.projection.StockMovementProjection;
 import com.example.Inventra.entity.StockTransaction;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -14,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface StockTransactionRepository extends JpaRepository<StockTransaction, Long> {
+public interface StockTransactionRepository extends JpaRepository<StockTransaction, Long>, JpaSpecificationExecutor<StockTransaction> {
 
     // FIXED: Explicitly added sorting to the JPQL string since method name derivation is ignored here
     @Query(value = """
@@ -66,4 +70,10 @@ public interface StockTransactionRepository extends JpaRepository<StockTransacti
 """)
     List<StockMovementProjection> getStockMovementsLast7Days(
             @Param("sevenDaysAgo") LocalDateTime sevenDaysAgo);
+
+    @EntityGraph(attributePaths = {"product", "product.category", "product.supplier"})
+    Page<StockTransaction> findAll(Specification<StockTransaction> spec, Pageable pageable);
+
+    @EntityGraph(attributePaths = {"product", "product.category", "product.supplier"})
+    List<StockTransaction> findAll(Specification<StockTransaction> spec, Sort sort);
 }
