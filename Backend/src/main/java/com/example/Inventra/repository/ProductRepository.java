@@ -1,5 +1,7 @@
 package com.example.Inventra.repository;
 
+import com.example.Inventra.dto.projection.CategoryDistributionProjection;
+import com.example.Inventra.dto.projection.SupplierPerformanceProjection;
 import com.example.Inventra.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -81,7 +83,63 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 """)
     List<Product> findAllBySupplierIdAndIsActiveTrue(@Param("supplierId") Long supplierId);
 
+    @Query("""
+    SELECT p FROM Product p
+    JOIN FETCH p.category
+    JOIN FETCH p.supplier
+    WHERE p.isActive = true
+""")
+    List<Product> findAllActiveWithRelations();
+
     boolean existsBySku(String sku);
+
+    // Total active products count — single aggregate query
+    @Query("SELECT COUNT(p) FROM Product p WHERE p.isActive = true")
+    Long countAllActiveProducts();
+
+    // Products below threshold count — single aggregate query
+    @Query("""
+    SELECT COUNT(p) FROM Product p
+    WHERE p.isActive = true
+    AND p.currentStock <= p.lowStockThreshold
+""")
+    Long countProductsBelowThreshold();
+
+    // Top 5 critical products — ordered by stock level
+    @Query("""
+    SELECT p FROM Product p
+    JOIN FETCH p.category
+    JOIN FETCH p.supplier
+    WHERE p.isActive = true
+    AND p.currentStock <= p.lowStockThreshold
+    ORDER BY p.currentStock ASC
+""")
+    List<Product> findTop5LowStockProducts(Pageable pageable);
+
+    // Category distribution — aggregate per category
+    @Query("""
+    SELECT p.category.name AS categoryName,
+           COUNT(p) AS totalProducts,
+           SUM(p.currentStock) AS totalStock
+    FROM Product p
+    WHERE p.isActive = true
+    GROUP BY p.category.name
+    ORDER BY totalStock DESC
+""")
+    List<CategoryDistributionProjection> getCategoryDistribution();
+
+    // Supplier performance — join with alert count
+    @Query("""
+    SELECT p.supplier.name AS supplierName,
+           COUNT(p) AS totalProducts,
+           SUM(CASE WHEN p.currentStock <= p.lowStockThreshold
+               THEN 1 ELSE 0 END) AS lowStockCount
+    FROM Product p
+    WHERE p.isActive = true
+    GROUP BY p.supplier.name
+    ORDER BY lowStockCount DESC
+""")
+    List<SupplierPerformanceProjection> getSupplierPerformance();
 
 
 

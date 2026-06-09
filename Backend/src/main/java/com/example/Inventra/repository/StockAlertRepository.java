@@ -34,4 +34,8 @@ public interface StockAlertRepository extends JpaRepository<StockAlert, Long> {
         ORDER BY a.createdAt DESC
     """)
     List<StockAlert> findByProductIdWithRelations(@Param("productId") Long productId);
+
+    // Active open alerts count
+    @Query("SELECT COUNT(a) FROM StockAlert a WHERE a.status = 'OPEN'")
+    Long countOpenAlerts();
 }
