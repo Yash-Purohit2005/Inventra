@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
@@ -141,6 +142,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 """)
     List<SupplierPerformanceProjection> getSupplierPerformance();
 
-
-
+    @Query("""
+    SELECT p FROM Product p
+    JOIN FETCH p.category
+    JOIN FETCH p.supplier
+    WHERE p.sku IN :skus
+    AND p.isActive = true
+""")
+    List<Product> findAllBySkuInWithRelations(@Param("skus") Set<String> skus);
 }
