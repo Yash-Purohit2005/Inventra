@@ -58,11 +58,7 @@ function DashboardPage() {
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
 
-  console.log(summary);
-  console.log(topLowStock);
-  console.log(stockMovements);
-  console.log(categoryData);
-  console.log(supplierData);
+
 
   return (
     <div>
