@@ -42,21 +42,21 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
     try {
       const payload = isEdit
         ? {
-            name: form.name,
-            price: parseFloat(form.price),
-            lowStockThreshold: parseInt(form.lowStockThreshold),
-            categoryId: parseInt(form.categoryId),
-            supplierId: parseInt(form.supplierId),
-          }
+          name: form.name,
+          price: parseFloat(form.price),
+          lowStockThreshold: parseInt(form.lowStockThreshold),
+          categoryId: parseInt(form.categoryId),
+          supplierId: parseInt(form.supplierId),
+        }
         : {
-            sku: form.sku,
-            name: form.name,
-            price: parseFloat(form.price),
-            currentStock: parseInt(form.currentStock),
-            lowStockThreshold: parseInt(form.lowStockThreshold),
-            categoryId: parseInt(form.categoryId),
-            supplierId: parseInt(form.supplierId),
-          };
+          sku: form.sku,
+          name: form.name,
+          price: parseFloat(form.price),
+          currentStock: parseInt(form.currentStock),
+          lowStockThreshold: parseInt(form.lowStockThreshold),
+          categoryId: parseInt(form.categoryId),
+          supplierId: parseInt(form.supplierId),
+        };
 
       await onSave(payload, product?.id);
     } catch (err) {
@@ -79,11 +79,12 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">SKU *</label>
             <input
+              type="text"
               name="sku"
               value={form.sku}
               onChange={handleChange}
               required
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         )}
@@ -91,11 +92,12 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Product Name *</label>
           <input
+            type="text"
             name="name"
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -109,7 +111,7 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
               value={form.price}
               onChange={handleChange}
               required
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
@@ -119,11 +121,11 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
               value={form.categoryId}
               onChange={handleChange}
               required
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">Select</option>
+              <option value="" className="text-slate-500">Select</option>
               {categories.map((c) => (
-                <option key={c.id} value={c.id}>{c.name}</option>
+                <option key={c.id} value={c.id} className="text-slate-800">{c.name}</option>
               ))}
             </select>
           </div>
@@ -137,11 +139,11 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
               value={form.supplierId}
               onChange={handleChange}
               required
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">Select</option>
+              <option value="" className="text-slate-500">Select</option>
               {suppliers.map((s) => (
-                <option key={s.id} value={s.id}>{s.name}</option>
+                <option key={s.id} value={s.id} className="text-slate-800">{s.name}</option>
               ))}
             </select>
           </div>
@@ -154,7 +156,7 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
                 value={form.currentStock}
                 onChange={handleChange}
                 required
-                className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           )}
@@ -168,7 +170,7 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
             value={form.lowStockThreshold}
             onChange={handleChange}
             required
-            className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -176,14 +178,14 @@ function ProductFormModal({ product, categories, suppliers, onClose, onSave }) {
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg"
+            className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg disabled:opacity-50"
+            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg disabled:opacity-50 transition-colors"
           >
             {saving ? 'Saving...' : 'Save Product'}
           </button>

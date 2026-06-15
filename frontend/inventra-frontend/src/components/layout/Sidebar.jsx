@@ -21,7 +21,7 @@ const navItems = [
 
 function Sidebar({ onNavigate }) {
   return (
-    <aside className="w-64 bg-slate-900 text-slate-200 min-h-screen flex flex-col">
+    <aside className="w-64 shrink-0 sticky top-0 bg-slate-900 text-slate-200 min-h-screen flex flex-col">
       <div className="p-6 border-b border-slate-800">
         <h1 className="text-2xl font-bold text-white">🏭 Inventra</h1>
         <p className="text-xs text-slate-400 mt-1">Warehouse Management</p>

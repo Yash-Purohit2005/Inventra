@@ -50,8 +50,8 @@ function StockAdjustModal({ product, onClose, onSuccess }) {
             {TYPES.map((t) => (
               <label
                 key={t}
-                className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-sm cursor-pointer ${
-                  type === t ? 'border-blue-500 bg-blue-50' : 'border-slate-200'
+                className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-sm text-slate-800 cursor-pointer transition-colors ${
+                  type === t ? 'border-blue-500 bg-blue-50' : 'border-slate-200 bg-white'
                 }`}
               >
                 <input
@@ -62,7 +62,7 @@ function StockAdjustModal({ product, onClose, onSuccess }) {
                   onChange={(e) => setType(e.target.value)}
                   className="accent-blue-600"
                 />
-                {t.replace('_', ' ')}
+                <span className="text-slate-800">{t.replace('_', ' ')}</span>
               </label>
             ))}
           </div>
@@ -76,17 +76,18 @@ function StockAdjustModal({ product, onClose, onSuccess }) {
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
             required
-            className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Operator *</label>
           <input
+            type="text"
             value={operator}
             onChange={(e) => setOperator(e.target.value)}
             required
-            className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-white text-slate-800 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -94,14 +95,14 @@ function StockAdjustModal({ product, onClose, onSuccess }) {
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg"
+            className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg disabled:opacity-50"
+            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg disabled:opacity-50 transition-colors"
           >
             {saving ? 'Processing...' : 'Confirm Adjustment'}
           </button>
