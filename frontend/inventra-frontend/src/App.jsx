@@ -5,6 +5,7 @@ import ProductsPage from './pages/ProductsPage';
 import StockHistory from './pages/StockHistoryPage';
 import AlertsPage from './pages/AlertsPage';
 import CsvImportPage from './pages/csvImportPage';
+import CategoryPage from './pages/CategoryPage';
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/stock-history" element={<StockHistory />} />
           <Route path="/alerts" element={<AlertsPage />} />
           <Route path="/csv-import" element={<CsvImportPage />} />
+          <Route path="/categories" element={<CategoryPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
