@@ -15,18 +15,18 @@ function CategoryProductsModal({ category, onClose }) {
   }, [category.id]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-      <div className="w-full max-w-2xl bg-white border border-slate-200 rounded-xl shadow-xl max-h-[85vh] flex flex-col">
-        <div className="flex items-center justify-between p-5 border-b border-slate-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+      <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
+        <div className="flex items-center justify-between p-5 border-b border-slate-800">
           <div>
-            <h3 className="text-lg font-bold text-slate-800">
+            <h3 className="text-lg font-bold text-white">
               {category.name}
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               Products in this category
             </p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
+          <button onClick={onClose} className="text-slate-400 hover:text-white">
             <X size={20} />
           </button>
         </div>
@@ -36,7 +36,7 @@ function CategoryProductsModal({ category, onClose }) {
             <LoadingSpinner />
           ) : products.length === 0 ? (
             <div className="text-center py-8">
-              <Package className="mx-auto text-slate-300 mb-3" size={32} />
+              <Package className="mx-auto text-slate-600  mb-3" size={32} />
               <p className="text-slate-500 text-sm">No products in this category.</p>
             </div>
           ) : (
@@ -44,15 +44,15 @@ function CategoryProductsModal({ category, onClose }) {
               {products.map((p) => (
                 <div
                   key={p.id}
-                  className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-lg px-4 py-3"
+                  className="flex items-center justify-between bg-slate-800/40 border border-slate-800 rounded-lg px-4 py-3"
                 >
                   <div>
-                    <p className="text-sm font-semibold text-slate-800">{p.name}</p>
-                    <p className="text-xs text-slate-400 font-mono">{p.sku}</p>
+                    <p className="text-sm font-semibold text-white">{p.name}</p>
+                    <p className="text-xs text-slate-500 font-mono">{p.sku}</p>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
-                    <span className="text-slate-600 font-mono">₹{p.price}</span>
-                    <span className="font-semibold text-slate-800">{p.currentStock} units</span>
+                    <span className="text-slate-400 font-mono">₹{p.price}</span>
+                    <span className="font-semibold text-slate-200">{p.currentStock} units</span>
                     <StockBadge
                       currentStock={p.currentStock}
                       threshold={p.lowStockThreshold}
