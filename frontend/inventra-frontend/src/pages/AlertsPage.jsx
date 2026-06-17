@@ -40,7 +40,7 @@ function AlertsPage() {
   if (error) return <ErrorMessage message={error} />;
 
   return (
-    <div className="min-h-screen text-slate-100 -m-6 p-4 sm:p-6  select-none">
+    <div className="min-h-screen text-slate-100 -m-6 p-4 sm:p-6 select-none">
       {/* Header */}
       <header className="mb-8 border-b border-slate-800 pb-6">
         <div className="flex items-center gap-3">

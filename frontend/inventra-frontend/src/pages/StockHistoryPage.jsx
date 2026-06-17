@@ -27,10 +27,10 @@ export default function StockHistoryPage() {
     }
   };
 
-  useEffect(() => { loadDataGrid(); }, [page]);
+useEffect(() => { loadDataGrid(); }, [page, filters]);
 
   return (
-    <div className="min-h-screen text-slate-100 font-sans p-4 sm:p-6 select-none">
+    <div className="min-h-screen text-slate-100 font-sans p-4 sm:p-6  select-none">
       
       {/* Top Deck Action Header Bar */}
       <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-6">
@@ -54,12 +54,11 @@ export default function StockHistoryPage() {
           <AdvancedFilters 
             filters={filters} 
             setFilters={setFilters} 
-            onApply={() => { setPage(0); loadDataGrid(); }} 
+            onApply={() => { setPage(0) }} 
             onClear={() => { 
               const cleared = { productId: '', type: '', startDate: '', endDate: '' }; 
               setFilters(cleared); 
               setPage(0); 
-              loadDataGrid(cleared); 
             }} 
           />
         </div>
