@@ -1,33 +1,20 @@
 import api from './api';
 
-export const adjustStock = (data) => api.post('/transactions/adjust', data);
+export const adjustStock = (data) =>
+  api.post('/transactions/adjust', data);
 
-export const getTransactionHistory = (page = 0, size = 20) => {
-  return api.get(`/transactions/history`, {
-    params: { page, size }
-  });
-};
+export const getTransactionHistory = (page = 0, size = 15) =>
+  api.get('/transactions/history', { params: { page, size } });
 
+export const getProductHistory = (productId, page = 0, size = 10) =>
+  api.get(`/transactions/product/${productId}`, { params: { page, size } });
 
-export const getProductHistory = (productId, page = 0, size = 10) => {
-  return api.get(`/transactions/product/${productId}`, {
-    params: { page, size }
-  });
-};
-
-
-export const getFilteredTransactions = (filters = {}, page = 0, size = 20) => {
-  // Discards empty fields to ensure crisp URL query mapping
+export const getFilteredTransactions = (filters = {}, page = 0, size = 15) => {
   const cleanParams = Object.fromEntries(
-    Object.entries(filters).filter(([_, value]) => value !== '' && value !== null)
+    Object.entries(filters).filter(([_, v]) => v !== '' && v !== null)
   );
-
   return api.get('/transactions/filter', {
-    params: {
-      page,
-      size,
-      ...cleanParams
-    }
+    params: { page, size, ...cleanParams },
   });
 };
 
