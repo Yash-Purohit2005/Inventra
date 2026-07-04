@@ -1232,25 +1232,25 @@ The overall architecture was designed with the following objectives:
 ## 🖼️ Application Screenshots
 
 ### 7.1 Dashboard
-![Dashboard](docs\images\dashboard.png)
+![Dashboard](docs/images/dashboard.png)
 
 ### 7.2 Products Management
-![Products](docs\images\product.png)
+![Products](docs/images/product.png)
 
 ### 7.3 Stock History
-![Stock History](docs\images/stock-history.png)
+![Stock History](docs/images/stock-history.png)
 
 ### 7.4 Low Stock Alerts
-![Alerts](docs\images\alerts.png)
+![Alerts](docs/images/alerts.png)
 
 ### 7.5 CSV Import
-![CSV Import](docs\images\csv_import.png)
+![CSV Import](docs/images/csv_import.png)
 
 ### 7.6 Categories Management
-![Categories](docs\images\categories.png)
+![Categories](docs/images/categories.png)
 
 ### 7.7 Suppliers Management
-![Suppliers](docs\images\suppliers.png)
+![Suppliers](docs/images/suppliers.png)
 
 
 # 👨‍💻 Author
